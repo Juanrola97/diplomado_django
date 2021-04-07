@@ -19,14 +19,7 @@ from objetos.materia import Materia
 from objetos.estudiante import Estudiante
 from objetos.profesor import Profesor
 
-def populate_data():
-    '''
-    Popular data de la informacion que vamos a trabajar
-    return dict {
-        'profesores': [<P. sebastian>, <P. luis>, <P. daniel>, ..],
-        'estudiantes': [<E. wilson>, <E. walter>, .. ],
-    }
-    '''
+def rellenarDatos():
 
     profesores = []
     estudiantes = []
@@ -34,7 +27,7 @@ def populate_data():
     notas = []
     matriculas = []
 
-    # --- POPUlAMOS PROFESORES ---
+    # --- PROFESORES ---
     profesor_1 = Profesor(
         id = 1,
         nombre = 'sebastian henao', 
@@ -46,7 +39,7 @@ def populate_data():
     )
 
     profesor_3 = Profesor(
-        id = 2,
+        id = 3,
         nombre = 'daniel vargas', 
     )
 
@@ -55,40 +48,40 @@ def populate_data():
     profesores.append(profesor_3)
 
 
-    # --- POPUlAMOS ESTUDIANTE ---
+    # --- ESTUDIANTE ---
     estudiante_1 = Estudiante(
         id = 1,
-        nombre = 'wilson sanmiguel', 
+        nombre = 'Wilson sanmiguel', 
     )
 
     estudiante_2 = Estudiante(
         id = 2,
-        nombre = 'walter giovanny', 
+        nombre = 'Juan giovanny', 
     )
 
 
     estudiantes.append(estudiante_1)
     estudiantes.append(estudiante_2)
 
-    # --- POPUlAMOS MATERIAS ---
+    # --- MATERIAS ---
     materia_1 = Materia(
-        id=1,
-        nombre='Programacion'
+        id = 1,
+        nombre ='Programacion'
     )
 
     materia_2 = Materia(
-        id=2,
-        nombre='Python'
+        id = 2,
+        nombre ='Python'
     )
 
     materia_3 = Materia(
-        id=3,
-        nombre='Html'
+        id = 3,
+        nombre = 'Html'
     )
 
     materia_4 = Materia(
-        id=4,
-        nombre='Web'
+        id = 4,
+        nombre = 'Web'
     )
 
     materias.append(materia_1)
@@ -172,9 +165,9 @@ def populate_data():
         'matriculas': matriculas
     }
 
-
-# Popular data 
-data = populate_data()
+'''
+# Rellenar datos
+data = rellenarDatos()
 
 # Imprimir valores 
 for key, value in data.items():
@@ -190,44 +183,80 @@ estudiantes = data.get('estudiantes')
 materias = data.get('materias')
 
 for matricula in matriculas:
-    print('estudiante: ', matricula.get_estudiante(estudiantes).nombre)
-    print('materia: ', matricula.get_mateia(materias).nombre)
-    print('promedio: ', matricula.get_promedio(notas))
+    print('estudiante: ', matricula.obtenerEstudiante(estudiantes).nombre)
+    print('materia: ', matricula.obtenerMateria(materias).nombre)
+    print('promedio: ', matricula.obtenerPromedio(notas))
     print('')
 
+'''
+print('---- MENU --- ')
+# Rellenar datos
+data = rellenarDatos()
+a = 1 
+index_materia = 1
+index_profesor = 1
+index_nota = 1
 
-# print('---- MENU --- ')
+while a != '0':
+    print('selecciona una opcion: ')
 
-# a = 1 
-# index_materia = 1
+    print('''
+    1) Agregar Materia
+    2) Agregar Profesor
+    3) Ver notas estudiante
+    8) Imprimir Profesores
+    9) Imprimir Materias
+    0) Salir
 
-# while (a):
-#     print('selecciona una opcion: ')
-
-#     print('''
-#     1) Agregar Materia
-#     9) Imprimir Materia
-#     0) Salir
-
-#     ''')
-
-#     a = input('ingresa el dato: ')
-#     if a == '1':
-#         # Agregar la materia
-#         nombre = input('ingresa el nombre de la materia: ')
-#         materia = Materia(index_materia, nombre)
-#         data.get('materias').append(materia)
-
-#         index_materia = index_materia + 1
-
-        
-#     if a == '9':
-#         # Imprimir materias 
-#         print('-- materias --')
-#         for materia in data.get('materias'):
-#             print(materia.nombre)
-#         print('')
-#         print('')
-
+    ''')
+    try:
+        a = input('ingresa el dato: ')
+        if a == '1':
+            # Agregar la materia
+            
+            nombre = input('ingresa el nombre de la materia: ')
+            materia = Materia(index_materia, nombre)
+            data.get('materias').append(materia)
     
+            index_materia += 1
+        
+        if a == '2':
+            # Agregar profesor
+            
+            nombre = input('ingresa el nombre del profesor: ')
+            profesor = Profesor(index_profesor, nombre)
+            data.get('profesores').append(profesor)
+    
+            index_materia += 1
+
+        if a == '3':
+            # Ver notas estudiante
+
+            id_matricula = input('Ingresa id de matricula')
+            contador = 1
+            for nota in data.get('notas'):
+                if nota.matricula_id == int(id_matricula):
+                    print(nota.valor)
+                    contador += 1
+
+        if a == '8':
+            # Imprimir profesor 
+            print('-- Profesores --')
+            for profesor in data.get('profesores'):
+                print(profesor.nombre)
+                print('')
+                print('')
+
+        if a == '9':
+            # Imprimir materias 
+            print('-- Materias --')
+            for materia in data.get('materias'):
+                print(materia.nombre)
+                print('')
+                print('')
+
+        else:
+            print('Ingrese una opcion valida')
+    except:
+        pass
 print('-- se acabo de ejecutar todo el codigo--')
