@@ -14,7 +14,7 @@ class Matricula():
         self.materia_id = materia_id
         self.profesor_id = profesor_id
 
-    def get_promedio(self, notas):
+    def obtenerPromedio(self, notas):
         suma_notas = 0
         contador_notas = 0
         for nota in notas:
@@ -24,15 +24,15 @@ class Matricula():
         
         return suma_notas/contador_notas if contador_notas else contador_notas
 
-    def get_mateia(self, materias):
+    def obtenerMateria(self, materias):
         mi_materia = None
         for materia in materias:
             if materia.id == self.materia_id:
                 mi_materia = materia
         
         return mi_materia
-
-    def get_estudiante(self, estudiantes):
+    
+    def obtenerEstudiante(self, estudiantes):
         mi_estudiante = None
         for estudiante in estudiantes:
             if estudiante.id == self.estudiante_id:
@@ -40,7 +40,7 @@ class Matricula():
         
         return mi_estudiante
     
-    def get_profesor(self, profesores):
+    def obtenerProfesor(self, profesores):
         mi_profesor = None
         for profesor in profesors:
             if profesor.id == self.profesor_id:

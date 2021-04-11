@@ -6,7 +6,7 @@ class Profesor():
         self.id = id
         self.nombre = nombre
 
-    def get_materias(self, matriculas):
+    def obtenerMaterias(self, matriculas):
         list_matricula = []
         for matricula in matriculas:
             if matricula.id == self.id:
