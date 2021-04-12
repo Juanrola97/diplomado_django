@@ -20,7 +20,7 @@ from objetos.estudiante import Estudiante
 from objetos.profesor import Profesor
 
 def rellenarDatos():
-
+    
     profesores = []
     estudiantes = []
     materias = []
